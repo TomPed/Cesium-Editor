@@ -12,6 +12,7 @@
   "author": "Tom Ped",
   "license": "Apache 2.0",
   "devDependencies": {
-    "cesium": "^1.19.0"
+    "cesium": "^1.19.0",
+    "codemirror": "^5.13.2"
   }
 }
