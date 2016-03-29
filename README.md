@@ -7,8 +7,6 @@ CesiumEditor is a simple cross platform desktop app that acts as a [Cesium](http
 ### Getting started
  * Clone the repo: `git clone git@github.com:TomPed/Cesium-Editor.git`
  * Run: `npm install`
- * Run: `npm install electron-prebuilt -g`
- * Run: `npm install electron-packager -g`
 
 To run the app, run: `npm run start`
 
