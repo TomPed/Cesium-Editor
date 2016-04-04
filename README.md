@@ -16,3 +16,5 @@ To run the app, run: `npm run start`
 
 1. If you have made changes in `main.js`, `index.js`, or any other file/added files, run `npm run start` to see the changes.
 2. When you are happy with you changes run `npm build-all` or `npm run build-mac` and `npm run build-win` in order to build the `.app` and `.exe`.
+
+For creating your own Cesium app using Electron check out [this](http://cesiumjs.org/2016/04/04/An-Introduction-to-Cesium-Desktop-Apps-with-Electron/) blog post.
