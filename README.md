@@ -8,7 +8,7 @@ CesiumEditor is a simple cross platform desktop app that acts as a [Cesium](http
  * Clone the repo: `git clone git@github.com:TomPed/Cesium-Editor.git`
  * Run: `npm install`
 
-To run the app, run: `npm run start`
+To run the app, run: `npm start`
 
 ![](./images/cesiumEditor.jpg)
 
