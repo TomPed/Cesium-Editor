@@ -12,7 +12,7 @@
   "author": "Tom Ped",
   "license": "Apache 2.0",
   "devDependencies": {
-    "cesium": "^1.19.0",
+    "cesium": "^1.20.0",
     "codemirror": "^5.13.2",
     "electron-packager": "^6.0.0",
     "electron-prebuilt": "^0.37.2"
