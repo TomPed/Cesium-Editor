@@ -31,14 +31,12 @@
   </div>
   <div id="cesiumContainer"></div>
   <script type="text/javascript" src="./code.js"></script>
-  <script type="text/javascript" src="./loadedData.js"></script>
   <script>
     var fs = require('fs');
     var path = require('path');
     var remote = require('remote');
     var dialog = remote.require('dialog');
     var pathToCode = path.join(__dirname, 'code.js');
-    var pathToloadedData = path.join(__dirname, 'loadedData.js');
     var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('code'), {
       mode : 'javascript',
       lineNumbers : true
@@ -69,8 +67,6 @@
         });
     }
     function loadData() {
-        var code;
-        var extension;
         dialog.showOpenDialog({filters : [{name : 'data', extensions : ['geojson', 'topojson', 'czml', 'kml', 'kmz', 'gltf']}]},
           function (fileNames) {
             if (fileNames === undefined) {
@@ -89,41 +85,34 @@
             var extension = path.extname(fileName);
             switch(extension) {
               case '.geojson':
-                code = 'viewer.dataSources.add(Cesium.GeoJsonDataSource.load(\'' + fileName + '\'));';
+                viewer.dataSources.add(Cesium.GeoJsonDataSource.load(fileName));
                 break;
               case '.topojson':
-                code = 'viewer.dataSources.add(Cesium.GeoJsonDataSource.load(\'' + fileName + '\'));';
+                viewer.dataSources.add(Cesium.GeoJsonDataSource.load(fileName));
                 break;
               case '.czml':
-                code = 'viewer.dataSources.add(Cesium.CzmlDataSource.load(\'' + fileName + '\'));';
+                viewer.dataSources.add(Cesium.CzmlDataSource.load(fileName));
                 break;
               case '.kml':
-                code = 'viewer.dataSources.add(Cesium.KmlDataSource.load(\'' + fileName + '\'));';
+                viewer.dataSources.add(Cesium.KmlDataSource.load(fileName));
                 break;
               case '.kmz':
-                code = 'viewer.dataSources.add(Cesium.KmlDataSource.load(\'' + fileName + '\'));';
+                viewer.dataSources.add(Cesium.KmlDataSource.load(fileName));
                 break;
               case '.gltf':
-                code = 'var entity = viewer.entities.add({' +
-                         'position : Cesium.Cartesian3.fromDegrees(-123.0744619, 44.0503706, 5000),' +
-                         'model : {' +
-                           'uri : \'' + fileName + '\'' +
-                         '}' +
-                       '});';
+                viewer.entities.add({
+                    position : Cesium.Cartesian3.fromDegrees(-123.0744619, 44.0503706, 5000),
+                    model : {
+                      uri : fileName
+                    }
+                });
                 break;
             }
-            if (code === undefined) {
-              return;
-            }
-            fs.appendFile(pathToloadedData, code, function (err) {});
-            fs.writeFile(pathToCode, myCodeMirror.getValue(), function (err) {});
-            window.location.reload();
         });
     }
     function clearData() {
-      fs.writeFile(path.join(__dirname, 'loadedData.js'), '', function (err) {});
-      fs.writeFile(pathToCode, myCodeMirror.getValue(), function (err) {});
-      window.location.reload();
+      viewer.dataSources.removeAll();
+      viewer.entities.removeAll();
     }
     function run() {
       fs.writeFile(pathToCode, myCodeMirror.getValue(), function (err) {});

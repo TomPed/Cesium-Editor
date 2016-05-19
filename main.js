@@ -12,7 +12,6 @@ app.on('ready', function() {
 
 app.on('quit', function () {
     fs.writeFile(path.join(__dirname, 'code.js'), 'var viewer = new Cesium.Viewer(\'cesiumContainer\');\n', function (err) {});
-    fs.writeFile(path.join(__dirname, 'loadedData.js'), '', function (err) {});
 });
 
 app.on('window-all-closed', function() {
